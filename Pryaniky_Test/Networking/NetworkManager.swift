@@ -8,9 +8,14 @@
 
 import Foundation
 
+protocol UIUpdateProtocol {
+    func updateUI(_ networkManager : NetworkManager, data: PryanikyData)
+}
+
+
 class NetworkManager {
     private let urlString = "https://pryaniky.com/static/json/sample.json"
-    
+    var delegate : UIUpdateProtocol?
     func fetchData(completion: @escaping (PryanikyData) -> Void)  {
         guard  let url = URL(string: urlString) else { print("Error, line 16"); return }
         let session = URLSession(configuration: .default)
@@ -18,6 +23,7 @@ class NetworkManager {
             guard let self = self,
                 let data = data,
                 let model = self.parseJSON(data) else { return }
+            self.delegate?.updateUI(self, data: model)
             completion(model)
         }
         task.resume()

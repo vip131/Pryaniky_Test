@@ -16,18 +16,18 @@ class ViewController: UIViewController {
     var views : [String]?
     var uiViews = [UIView]()
     
-   
+    
     
     override func viewDidLoad() {
-       
+        networkManger.delegate = self
         print("didload")
         fetch()
-    
+        
         
     }
     
     @IBAction func ddd(_ sender: UIButton) {
-         configurateStack()
+        configurateStack()
     }
     
     func configurateStack() {
@@ -40,6 +40,7 @@ class ViewController: UIViewController {
             
             //MARK: - ImageView setup
             let imageView =  UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+            imageView.accessibilityLabel = self.photoName
             self.getImage(from: self.photoUrl, to: imageView)
             
             
@@ -82,7 +83,7 @@ class ViewController: UIViewController {
             for view in self.uiViews {
                 self.stackView.addArrangedSubview(view)
             }
-           
+            
             
             //MARK: - Add stackView to mainView
             self.view.addSubview(self.stackView)
@@ -129,7 +130,8 @@ class ViewController: UIViewController {
                 }
             }
         }
-       print("end fetch")
+        print("end fetch")
+        
     }
     
     
@@ -158,11 +160,16 @@ class ViewController: UIViewController {
     
     
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
+    
+    
+    
+    
+}
+
+extension ViewController: UIUpdateProtocol {
+    func updateUI(_ networkManager: NetworkManager, data: PryanikyData) {
+        configurateStack()
     }
-    
-    
     
     
 }
