@@ -7,15 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		844C857625C6FC0800A3E0E3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844C857525C6FC0800A3E0E3 /* NetworkManager.swift */; };
 		845D7F3225C44D2F005DEA0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D7F3125C44D2F005DEA0B /* AppDelegate.swift */; };
 		845D7F3425C44D2F005DEA0B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D7F3325C44D2F005DEA0B /* SceneDelegate.swift */; };
-		845D7F3625C44D2F005DEA0B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D7F3525C44D2F005DEA0B /* ViewController.swift */; };
 		845D7F3925C44D2F005DEA0B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 845D7F3725C44D2F005DEA0B /* Main.storyboard */; };
 		845D7F3B25C44D33005DEA0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 845D7F3A25C44D33005DEA0B /* Assets.xcassets */; };
 		845D7F3E25C44D33005DEA0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 845D7F3C25C44D33005DEA0B /* LaunchScreen.storyboard */; };
+		845D7F4C25C44FE7005DEA0B /* PryanikyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D7F4B25C44FE7005DEA0B /* PryanikyModel.swift */; };
+		845D7F4E25C450A4005DEA0B /* PryanikyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D7F4D25C450A4005DEA0B /* PryanikyData.swift */; };
+		845D7F5025C45277005DEA0B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D7F3525C44D2F005DEA0B /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		844C857525C6FC0800A3E0E3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		845D7F2E25C44D2F005DEA0B /* Pryaniky_Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pryaniky_Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		845D7F3125C44D2F005DEA0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		845D7F3325C44D2F005DEA0B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +28,8 @@
 		845D7F3A25C44D33005DEA0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		845D7F3D25C44D33005DEA0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		845D7F3F25C44D33005DEA0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		845D7F4B25C44FE7005DEA0B /* PryanikyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PryanikyModel.swift; sourceTree = "<group>"; };
+		845D7F4D25C450A4005DEA0B /* PryanikyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PryanikyData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +62,50 @@
 		845D7F3025C44D2F005DEA0B /* Pryaniky_Test */ = {
 			isa = PBXGroup;
 			children = (
+				845D7F4825C44F21005DEA0B /* Networking */,
+				845D7F4725C44EF5005DEA0B /* Model */,
+				845D7F4625C44EF0005DEA0B /* View */,
+				845D7F4525C44EE7005DEA0B /* Controller */,
 				845D7F3125C44D2F005DEA0B /* AppDelegate.swift */,
 				845D7F3325C44D2F005DEA0B /* SceneDelegate.swift */,
-				845D7F3525C44D2F005DEA0B /* ViewController.swift */,
-				845D7F3725C44D2F005DEA0B /* Main.storyboard */,
 				845D7F3A25C44D33005DEA0B /* Assets.xcassets */,
-				845D7F3C25C44D33005DEA0B /* LaunchScreen.storyboard */,
 				845D7F3F25C44D33005DEA0B /* Info.plist */,
 			);
 			path = Pryaniky_Test;
+			sourceTree = "<group>";
+		};
+		845D7F4525C44EE7005DEA0B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				845D7F3525C44D2F005DEA0B /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		845D7F4625C44EF0005DEA0B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				845D7F3725C44D2F005DEA0B /* Main.storyboard */,
+				845D7F3C25C44D33005DEA0B /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		845D7F4725C44EF5005DEA0B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				845D7F4B25C44FE7005DEA0B /* PryanikyModel.swift */,
+				845D7F4D25C450A4005DEA0B /* PryanikyData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		845D7F4825C44F21005DEA0B /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				844C857525C6FC0800A3E0E3 /* NetworkManager.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,7 +179,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				845D7F3625C44D2F005DEA0B /* ViewController.swift in Sources */,
+				844C857625C6FC0800A3E0E3 /* NetworkManager.swift in Sources */,
+				845D7F5025C45277005DEA0B /* ViewController.swift in Sources */,
+				845D7F4C25C44FE7005DEA0B /* PryanikyModel.swift in Sources */,
+				845D7F4E25C450A4005DEA0B /* PryanikyData.swift in Sources */,
 				845D7F3225C44D2F005DEA0B /* AppDelegate.swift in Sources */,
 				845D7F3425C44D2F005DEA0B /* SceneDelegate.swift in Sources */,
 			);
@@ -294,7 +338,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dmitry.chashin.Pryaniky-Test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -312,7 +356,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dmitry.chashin.Pryaniky-Test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
