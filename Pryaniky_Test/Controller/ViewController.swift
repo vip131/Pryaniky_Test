@@ -13,14 +13,22 @@ class ViewController: UIViewController {
     var selectedSegment : Int?
     var photoName: String?
     var photoUrl: String?
-    var views : [UIView]?
+    var views : [String]?
+    var uiViews = [UIView]()
+    
+   
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+       
+        print("didload")
         fetch()
-        configurateStack()
+    
+        
     }
     
+    @IBAction func ddd(_ sender: UIButton) {
+         configurateStack()
+    }
     
     func configurateStack() {
         DispatchQueue.main.async {
@@ -51,20 +59,31 @@ class ViewController: UIViewController {
             let segmentedControl = UISegmentedControl(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
             segmentedControl.selectedSegmentTintColor = .red
             
-            
             for  (index, _) in self.selectorsArr.enumerated() {
                 segmentedControl.insertSegment(withTitle: self.selectorsArr[index].text, at: index, animated: true)
-                
             }
+            
             if let selectedID = self.selectedSegment {
                 segmentedControl.selectedSegmentIndex = selectedID
             }
             
             //MARK: - Adding to StackView
+            for view in self.views! {
+                switch view {
+                case "hz" : self.uiViews.append(textView)
+                case "selector": self.uiViews.append(segmentedControl)
+                case "picture": self.uiViews.append(imageView)
+                default:
+                    print("error")
+                }
+                
+            }
             
-            self.stackView.addArrangedSubview(segmentedControl)
-            self.stackView.addArrangedSubview(textView)
-            self.stackView.addArrangedSubview(imageView)
+            for view in self.uiViews {
+                self.stackView.addArrangedSubview(view)
+            }
+           
+            
             //MARK: - Add stackView to mainView
             self.view.addSubview(self.stackView)
             self.view.reloadInputViews()
@@ -74,9 +93,10 @@ class ViewController: UIViewController {
     
     
     func fetch() {
+        print("fetch")
         networkManger.fetchData { (model) in
             let views = model.view
-            
+            self.views = views
             let data = model.data
             for model in data {
                 if model.name == "hz" {
@@ -109,6 +129,7 @@ class ViewController: UIViewController {
                 }
             }
         }
+       print("end fetch")
     }
     
     
