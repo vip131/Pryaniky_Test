@@ -7,15 +7,19 @@ class ViewController: UIViewController {
     let networkManger = NetworkManager()
     
     lazy var segmentedControl: UISegmentedControl = {
-        let segmenterControl = UISegmentedControl()
-        segmenterControl.selectedSegmentTintColor = .red
-        return segmenterControl
+        let segmentedControl = UISegmentedControl()
+        segmentedControl.selectedSegmentTintColor = .red
+        if let selectedID = self.selectedSegment {
+            segmentedControl.selectedSegmentIndex = selectedID
+            segmentedControl.addTarget(self, action: #selector(selectorChangeValue), for: .valueChanged)
+        }
+        return segmentedControl
     }()
     
     lazy var stackView: UIStackView = {
         let stack = UIStackView(frame: CGRect(x: 0,y: 0,
-        width: self.view.bounds.width,
-        height: self.view.bounds.height))
+                                              width: self.view.bounds.width,
+                                              height: self.view.bounds.height))
         stack.axis = .vertical
         stack.alignment = .fill
         stack.distribution = .fillEqually
@@ -24,7 +28,7 @@ class ViewController: UIViewController {
     }()
     
     lazy var imageView: UIImageView = {
-       let imgView = UIImageView()
+        let imgView = UIImageView()
         imgView.accessibilityLabel = self.photoName
         self.getImage(from: self.photoUrl, to: imgView)
         return imgView
@@ -36,58 +40,42 @@ class ViewController: UIViewController {
         return textView
     }()
     
-    var selectorsArr = [(id: Int,text: String)]()
-    var textBlock : String?
-    var selectedSegment : Int?
-    var photoName: String?
-    var photoUrl: String?
-    var views : [String]?
-    var uiViews = [UIView]()
+    private var selectorsArr = [(id: Int,text: String)]()
+    private var textBlock : String?
+    private var selectedSegment : Int?
+    private var photoName: String?
+    private var photoUrl: String?
+    private var views : [String]!
+    private var uiViews = [UIView]()
     
     override func viewDidLoad() {
         networkManger.delegate = self
         networkManger.fetchData()
     }
     
-    
-    
     func configurateStack() {
         DispatchQueue.main.async {
-     
             //MARK: - Segmented COntrol SetUp
-            
             for (index, _) in self.selectorsArr.enumerated() {
                 self.segmentedControl.insertSegment(withTitle: self.selectorsArr[index].text,
                                                     at: index,
                                                     animated: true)
+                self.segmentedControl.selectedSegmentIndex = self.selectedSegment!
             }
-            
-            if let selectedID = self.selectedSegment {
-                self.segmentedControl.selectedSegmentIndex = selectedID
-                
-            }
-            
             //MARK: - Adding to StackView
-            for view in self.views! {
+            for view in self.views {
                 switch view {
-                case "hz" : self.uiViews.append(self.textView)
-                case "selector": self.uiViews.append(self.segmentedControl)
-                case "picture": self.uiViews.append(self.imageView)
+                case "hz" : self.stackView.addArrangedSubview(self.textView)
+                case "selector": self.stackView.addArrangedSubview(self.segmentedControl)
+                case "picture": self.stackView.addArrangedSubview(self.imageView)
                 default:
-                    print("error")
+                    print("error in configurateStack Method ")
                 }
             }
-            
-            for view in self.uiViews {
-                self.stackView.addArrangedSubview(view)
-            }
-            
             //MARK: - Add stackView to mainView
             self.view.addSubview(self.stackView)
-            
         }
     }
-    
     
     //MARK: - GetImage -
     func getImage(from string: String?, to view: UIImageView) {
@@ -110,12 +98,31 @@ class ViewController: UIViewController {
         }
     }
     
+    //MARK: - Touches Began -
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            let position = touch.location(in: view)
+            if self.imageView.frame.contains(position) {
+                print("->ImageView")
+            }
+            if self.textView.frame.contains(position) {
+                print("->Text")
+            }
+        }
+    }
+    
+    //MARK: - Actions -
+    @objc func selectorChangeValue(sender: UISegmentedControl) {
+        print("Selected segment -> \(sender.selectedSegmentIndex)")
+    }
+    
 }
 
+
+//MARK: - UIUpdateProtocolDelegate -
 extension ViewController: UIUpdateProtocol {
-    func updateUI(_ networkManager: NetworkManager, data: PryanikyData) {
-        let views = data.view
-        self.views = views
+    func didUpdateUI(_ networkManager: NetworkManager, data: PryanikyData) {
+        self.views = data.view
         let data = data.data
         for model in data {
             if model.name == "hz" {
@@ -136,13 +143,10 @@ extension ViewController: UIUpdateProtocol {
                     for selector in selectors {
                         let select = (selector.id, selector.text)
                         self.selectorsArr.append(select)
-                        
                     }
                 }
             }
         }
         configurateStack()
-        
     }
-    
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 protocol UIUpdateProtocol {
-    func updateUI(_ networkManager : NetworkManager, data: PryanikyData)
+    func didUpdateUI(_ networkManager : NetworkManager, data: PryanikyData)
 }
 
 
@@ -25,7 +25,7 @@ class NetworkManager {
                 return }
                 if let safeData = data {
               if let model = self.parseJSON(safeData) {
-            self.delegate?.updateUI(self, data: model)
+            self.delegate?.didUpdateUI(self, data: model)
                     }
         }
         }
