@@ -16,15 +16,18 @@ protocol UIUpdateProtocol {
 class NetworkManager {
     private let urlString = "https://pryaniky.com/static/json/sample.json"
     var delegate : UIUpdateProtocol?
-    func fetchData(completion: @escaping (PryanikyData) -> Void)  {
-        guard  let url = URL(string: urlString) else { print("Error, line 16"); return }
+    func fetchData()  {
+        guard  let url = URL(string: urlString) else { print("Error"); return }
         let session = URLSession(configuration: .default)
-        let task = session.dataTask(with: url) { [weak self] data, response, error in
-            guard let self = self,
-                let data = data,
-                let model = self.parseJSON(data) else { return }
+        let task = session.dataTask(with: url) {  (data, response, error) in
+            if error != nil {
+                print("\(error!.localizedDescription)")
+                return }
+                if let safeData = data {
+              if let model = self.parseJSON(safeData) {
             self.delegate?.updateUI(self, data: model)
-            completion(model)
+                    }
+        }
         }
         task.resume()
     }

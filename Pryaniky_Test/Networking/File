@@ -1,0 +1,35 @@
+{ (model) in
+    let views = model.view
+    self.views = views
+    let data = model.data
+    for model in data {
+        if model.name == "hz" {
+            if let safeText = model.data.text {
+                self.textBlock = safeText
+            }
+        } else if model.name == "picture" {
+            if let safePictureUrl = model.data.url,
+                let safePictureName = model.data.text {
+                self.photoName = safePictureName
+                self.photoUrl = safePictureUrl
+            }
+        } else if model.name == "selector" {
+            if let selectedID = model.data.selectedID {
+                self.selectedSegment = selectedID
+            }
+            if let selectors = model.data.variants {
+                for selector in selectors {
+                    let select = (selector.id, selector.text)
+                    self.selectorsArr.append(select)
+                }
+            }
+        }
+    }
+}
+
+
+
+
+x: 0,y: 0,
+width: self.view.bounds.width,
+height: self.view.bounds.height)

@@ -16,6 +16,7 @@
 		845D7F4C25C44FE7005DEA0B /* PryanikyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D7F4B25C44FE7005DEA0B /* PryanikyModel.swift */; };
 		845D7F4E25C450A4005DEA0B /* PryanikyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D7F4D25C450A4005DEA0B /* PryanikyData.swift */; };
 		845D7F5025C45277005DEA0B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D7F3525C44D2F005DEA0B /* ViewController.swift */; };
+		846D564425CBDC4D0030A557 /* File in Resources */ = {isa = PBXBuildFile; fileRef = 846D564325CBDC4D0030A557 /* File */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		845D7F3F25C44D33005DEA0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		845D7F4B25C44FE7005DEA0B /* PryanikyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PryanikyModel.swift; sourceTree = "<group>"; };
 		845D7F4D25C450A4005DEA0B /* PryanikyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PryanikyData.swift; sourceTree = "<group>"; };
+		846D564325CBDC4D0030A557 /* File */ = {isa = PBXFileReference; lastKnownFileType = text; path = File; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				844C857525C6FC0800A3E0E3 /* NetworkManager.swift */,
+				846D564325CBDC4D0030A557 /* File */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				846D564425CBDC4D0030A557 /* File in Resources */,
 				845D7F3E25C44D33005DEA0B /* LaunchScreen.storyboard in Resources */,
 				845D7F3B25C44D33005DEA0B /* Assets.xcassets in Resources */,
 				845D7F3925C44D2F005DEA0B /* Main.storyboard in Resources */,
