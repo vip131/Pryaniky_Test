@@ -25,11 +25,8 @@ struct PryanikyModel {
         struct Selector {
             let name: String
             let variant: Int
-            
         }
     }
-    
-    
     let view : [String]
     let data:[Objects]
 }
